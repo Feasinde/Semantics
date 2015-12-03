@@ -1,7 +1,7 @@
 #################################################
-##Semantic quantifier calculator                #
-##by Andrés Lou, 2015                          #
-##Creative Commons Attribution License (cc-by)  #
+##Semantic quantifier calculator               ##
+##by Andrés Lou, 2015                          ##
+##Creative Commons Attribution License (cc-by) ##
 #################################################
 
 
@@ -20,55 +20,68 @@ def powerset(iterable):
 ##object. A is meant to represent the universe of discourse
 ##and B the quantified noun.
 def convertToPowerSets(Astr,Bstr):
-    Aprime = list(powerset(Astr))
-    B = set(Bstr)
-    A = set()
-    Alist = []
-    for i in Aprime:
+    Bprime = list(powerset(Bstr))
+    A = set(Astr)
+    B = set()
+    Blist = []
+    for i in Bprime:
         if i != ():
-            Alist.append(frozenset(i))
-    A = set(Alist)
+            Blist.append(frozenset(i))
+    B = set(Blist)
 
     return A,B
 
 ##All Q methods take two parameters, a powerset A
 ##of the universe of discourse, A, and the set of
 ##the interpretation of the quantified noun, B
-def Qmost(A,B):
+def Qmost(Astr,Bstr):
+    A,B = convertToPowerSets(Astr,Bstr)
     listOfSets = []
-    for subset in A:
-        if len(subset.intersection(B)) > len(subset.difference(B)):
+    for subset in B:
+        if len(A.intersection(subset)) > len(A.difference(subset)):
             listOfSets.append(list(subset))
 
     return listOfSets
 
-def QfewerThan3(A,B):
+def QfewerThan3(Astr,Bstr):
+    A,B = convertToPowerSets(Astr,Bstr)
     listOfSets = []
-    for subset in A:
-        if len(subset.intersection(B)) < 3:
+    for subset in B:
+        if len(A.intersection(subset)) < 3:
             listOfSets.append(list(subset))
 
     return listOfSets
 
-def Qevery(A,B):
+def Qevery(Astr,Bstr):
+    A,B = convertToPowerSets(Astr,Bstr)
     listOfSets = []
-    for subset in A:
-        if subset.issubset(B):
+    for subset in B:
+        if A.issubset(subset):
             listOfSets.append(list(subset))
 
     return listOfSets
 
-def Qsome(A,B):
+def Qsome(Astr,Bstr):
+    A,B = convertToPowerSets(Astr,Bstr)
     listOfSets = []
-    for subset in A:
-        if subset.intersection(B) != set():
+    for subset in B:
+        if A.intersection(subset) != set():
             listOfSets.append(list(subset))
     return listOfSets
 
-def Qno(A,B):
+def Qno(Astr,Bstr):
+    A,B = convertToPowerSets(Astr,Bstr)
     listOfSets = []
-    for subset in A:
-        if subset.intersection(B) == set():
+    for subset in B:
+        if A.intersection(subset) == set():
+            listOfSets.append(list(subset))
+    return listOfSets
+
+def Qshmewer(Astr,Bstr):
+    A,B = convertToPowergzaySets(Astr,Bstr)
+    listOfSets = []
+    for subset in B:
+        if len(A) < len(subset):
             listOfSets.append(list(subset))
     return listOfSets
 
@@ -81,37 +94,52 @@ def Qno(A,B):
 #teachers ->    {n,o}
 #laughed -->    {n,o}
 
-#>>> A,B = convertToPowerSets("lmnop", "lmp")
-
 #“Most monkeys”
 
-#>>> mostAB = Qmost(A,B)
+#>>> for i in Qmost("lmp","lmnop"): print(i)
+
+##['n', 'm', 'p']
+##['l', 'm', 'n', 'o', 'p']
+##['l', 'm', 'n', 'o']
+##['l', 'm', 'n']
+##['l', 'o', 'p']
+##['l', 'n', 'p']
+##['l', 'm', 'o', 'p']
+##['m', 'p']
+##['l', 'm', 'n', 'p']
+##['l', 'p']
+##['m', 'o', 'p']
+##['l', 'n', 'o', 'p']
+##['n', 'm', 'o', 'p']
+##['l', 'm']
+##['l', 'm', 'o']
+##['l', 'm', 'p']
 
 #“No monkeys”
 
-#>>> noAB = Qno(A,B)
+#>>> for i in Qno("lmp","lmnop"): print(i)
 
-##>>> for i in mostAB: i
-##
-##['p', 'm']
-##['p', 'l', 'm']
-##['p', 'n', 'l', 'm']
-##['o', 'p', 'l']
-##['n', 'l', 'm']
-##['m']
-##['l', 'm']
-##['o', 'p', 'l', 'm']
-##['o', 'n', 'l', 'm', 'p']
-##['o', 'l', 'm']
-##['p', 'n', 'l']
-##['p', 'l']
-##['o', 'p', 'm']
-##['p', 'n', 'm']
-##['l']
-##['p']
-
-##>>> for i in noAB: i
-##
-##['o', 'n']
-##['o']
 ##['n']
+##['n', 'o']
+##['o']
+
+##“Most monkeys”
+
+##>>> for i in mostAB: print(i)
+
+##['n', 'm', 'p']
+##['l', 'm', 'n', 'o', 'p']
+##['l', 'm', 'n', 'o']
+##['l', 'm', 'n']
+##['l', 'o', 'p']
+##['l', 'n', 'p']
+##['l', 'm', 'o', 'p']
+##['m', 'p']
+##['l', 'm', 'n', 'p']
+##['l', 'p']
+##['m', 'o', 'p']
+##['l', 'n', 'o', 'p']
+##['n', 'm', 'o', 'p']
+##['l', 'm']
+##['l', 'm', 'o']
+##['l', 'm', 'p']
