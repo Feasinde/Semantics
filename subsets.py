@@ -31,7 +31,7 @@ def convertToPowerSets(Astr,Bstr):
 
     return A,B
 
-##All Q methods take to parameters, a powerset A
+##All Q methods take two parameters, a powerset A
 ##of the universe of discourse, A, and the set of
 ##the interpretation of the quantified noun, B
 def Qmost(A,B):
