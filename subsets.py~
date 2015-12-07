@@ -78,25 +78,10 @@ def Qno(Astr,Bstr):
     return listOfSets
 
 def Qshmewer(Astr,Bstr):
-    A,B = convertToPowerSets(Astr,Bstr)
+    A,B = convertToPowergzaySets(Astr,Bstr)
     listOfSets = []
     for subset in B:
         if len(A) < len(subset):
-            listOfSets.append(list(subset))
-    return listOfSets
-
-def Qtwo(Astr, Bstr):
-    A,B = convertToPowerSets(Astr, Bstr)
-    listOfSets = []
-    for subset in B:
-        if len(A.intersection(subset)) == 2:
-            listOfSets.append(list(subset))
-    return listOfSets
-
-def Qshmewer(A,B):
-    listOfSets = []
-    for subset in A:
-        if len(subset) < len(B):
             listOfSets.append(list(subset))
     return listOfSets
 
@@ -158,4 +143,3 @@ def Qshmewer(A,B):
 ##['l', 'm']
 ##['l', 'm', 'o']
 ##['l', 'm', 'p']
-
