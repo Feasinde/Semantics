@@ -72,6 +72,13 @@ def Qno(A,B):
             listOfSets.append(list(subset))
     return listOfSets
 
+def Qshmewer(A,B):
+    listOfSets = []
+    for subset in A:
+        if len(subset) < len(B):
+            listOfSets.append(list(subset))
+    return listOfSets
+
 ###EXAMPLE OF USE###
 
 #M = <{l, m, n, o, p}, i> , where i has the following graph:
