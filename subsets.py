@@ -89,7 +89,7 @@ def Qtwo(Astr, Bstr):
     A,B = convertToPowerSets(Astr, Bstr)
     listOfSets = []
     for subset in B:
-        if A.intersection(subset) == 2:
+        if len(A.intersection(subset)) == 2:
             listOfSets.append(list(subset))
     return listOfSets
 
