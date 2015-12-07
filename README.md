@@ -6,7 +6,7 @@
 
 ##Usage:
 
-On the shell, simply import the script and its functions by typing:
+Place the script on your working directory and simply import the script and its functions by typing on the shell:
 
 ``from semQuantifiers import *``
 
